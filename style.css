@@ -1,0 +1,13 @@
+body {
+  background-color: rgb(220, 253, 249);
+  font-family: "Open Sans Condensed", sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 {
+  letter-spacing: 15px;
+}
