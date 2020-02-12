@@ -3,5 +3,5 @@ Creating a simple and meaningless to do list in javascript
 
 
 
-##Author 
+## Author 
 Mikaela Lundsgård
