@@ -7,19 +7,28 @@ const input = document.querySelector(".input-to-do");
 function handleEventlisteners() {
   //Updates the task
 
-  // const update = document.querySelector(".update");
-  // const updatedTask = document.querySelector(".update-task-text");
-  // update.addEventListener("click", function(e) {
-  //   e.preventDefault();
+  const updateBtns = document.querySelectorAll(".update");
+  const updatedTask = document.querySelector(".update-task-text");
+  updateBtns.forEach(updateBtn => {
+    updateBtn.addEventListener("click", function(e) {
+      e.preventDefault();
 
-  //   console.log("You clicked update btn");
-  //   //Need to target closest paragraph and update text
+      console.log("You clicked update btn");
 
-  //   //value from updated text
-  //   // const hej = updatedTask.value;
+      const currentForm = e.currentTarget.parentElement;
 
-  //   // taskaa.closest(".task-text").innerHTML = "he";
-  // });
+      currentForm.classList.remove("active");
+
+      console.log(currentForm.input);
+
+      //Need to target closest paragraph and update text
+
+      //value from updated text
+      // const hej = updatedTask.value;
+
+      // taskaa.closest(".task-text").innerHTML = "he";
+    });
+  });
 
   //Delete the task
   const deleteBtns = document.querySelectorAll(".delete");
@@ -29,30 +38,23 @@ function handleEventlisteners() {
       e.preventDefault();
 
       const task = e.currentTarget.closest("div");
-      // console.log(task);
 
-      //dosen't work as i want, but almost!!
       task.remove();
     });
   });
 
-  const editBtns = document.querySelectorAll(".edit");
-  const taskForm = document.querySelector(".task-form");
-
   //Display the edit form on click
-  editBtns.forEach(editBtn => {
-    console.log("you clicked edit");
+  const editBtns = document.querySelectorAll(".edit");
 
+  editBtns.forEach(editBtn => {
     editBtn.addEventListener("click", function(e) {
       e.preventDefault();
 
-      //Need to find the closes task-form and toggle class active
-      const test = e.currentTarget.parentElement;
+      //Need to find the closes task-form and toggle class active});
+      const currentTask = e.currentTarget.nextElementSibling;
+      console.log("you clicked edit");
 
-      //Need to target the closest p not the closest div
-      //and then update text.
-      console.log(test);
-      taskForm.classList.toggle("active");
+      currentTask.classList.add("active");
     });
   });
 
@@ -80,7 +82,6 @@ form.addEventListener("submit", function(e) {
   div.classList.add("wrapper");
 
   const template = `  <p id="hej" class="task-text"> ${taskValue}</p> 
- 
   <button class="done"> Done </button>  
   <button class="edit"> Edit </button>
     <form class="task-form">
@@ -96,6 +97,5 @@ form.addEventListener("submit", function(e) {
 
   form.appendChild(div);
   form.reset();
-
   handleEventlisteners();
 });
