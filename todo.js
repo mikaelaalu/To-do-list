@@ -6,14 +6,10 @@ const input = document.querySelector(".input-to-do");
 
 function handleEventlisteners() {
   //Updates the task
-
   const updateBtns = document.querySelectorAll(".update");
-  const updatedTask = document.querySelector(".update-task-text");
   updateBtns.forEach(updateBtn => {
     updateBtn.addEventListener("click", function(e) {
       e.preventDefault();
-
-      console.log("You clicked update btn");
 
       const currentForm = e.currentTarget.parentElement;
 
@@ -22,13 +18,7 @@ function handleEventlisteners() {
       // value from updated text
       const updatedText = currentForm.firstElementChild.value;
 
-      console.log(updatedText);
-
-      //Need to target closest paragraph and insert updates text
-
-      const parent = currentForm.parentElement;
-
-      parent.firstElementChild.innerHTML = updatedText;
+      currentForm.parentElement.firstElementChild.innerHTML = updatedText;
 
       currentForm.reset();
     });
@@ -54,7 +44,6 @@ function handleEventlisteners() {
     editBtn.addEventListener("click", function(e) {
       e.preventDefault();
 
-      //Need to find the closes task-form and toggle class active});
       const currentTask = e.currentTarget.nextElementSibling;
       console.log("you clicked edit");
 
@@ -62,7 +51,7 @@ function handleEventlisteners() {
     });
   });
 
-  //move finished task to bottom and make it green
+  // want to move finished task to bottom and make it green
   const doneBtns = document.querySelectorAll(".done");
 
   doneBtns.forEach(doneBtn => {
@@ -81,13 +70,16 @@ form.addEventListener("submit", function(e) {
 
   const taskValue = input.value;
 
-  const div = document.createElement("div");
+  if (taskValue === "") {
+    window.alert("no");
+  } else {
+    const div = document.createElement("div");
 
-  div.classList.add("wrapper");
+    div.classList.add("wrapper");
 
-  const template = ` <p class="task-text"> ${taskValue}</p> 
-  <button class="done"> Done </button>  
-  <button class="edit"> Edit </button>
+    const template = ` <p class="task-text"> ${taskValue}</p> 
+    <button class="done"> Done </button>  
+    <button class="edit"> Edit </button>
     <form class="task-form">
     <input name="update-task" class="update-task-text" placeholder="Update task"></input>
     <button class="update">Save</button>
@@ -96,9 +88,10 @@ form.addEventListener("submit", function(e) {
 
   `;
 
-  div.innerHTML = template;
+    div.innerHTML = template;
 
-  form.appendChild(div);
-  form.reset();
-  handleEventlisteners();
+    form.appendChild(div);
+    form.reset();
+    handleEventlisteners();
+  }
 });
