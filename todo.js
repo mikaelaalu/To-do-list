@@ -7,19 +7,19 @@ const input = document.querySelector(".input-to-do");
 function handleEventlisteners() {
   //Updates the task
 
-  const update = document.querySelector(".update");
-  const updatedTask = document.querySelector(".update-task-text");
-  update.addEventListener("click", function(e) {
-    e.preventDefault();
+  // const update = document.querySelector(".update");
+  // const updatedTask = document.querySelector(".update-task-text");
+  // update.addEventListener("click", function(e) {
+  //   e.preventDefault();
 
-    console.log("You clicked update btn");
-    //Need to target closest paragraph and update text
+  //   console.log("You clicked update btn");
+  //   //Need to target closest paragraph and update text
 
-    //value from updated text
-    // const hej = updatedTask.value;
+  //   //value from updated text
+  //   // const hej = updatedTask.value;
 
-    // taskaa.closest(".task-text").innerHTML = "he";
-  });
+  //   // taskaa.closest(".task-text").innerHTML = "he";
+  // });
 
   //Delete the task
   const deleteBtns = document.querySelectorAll(".delete");
@@ -28,10 +28,11 @@ function handleEventlisteners() {
     deleteBtn.addEventListener("click", function(e) {
       e.preventDefault();
 
-      const task = e.currentTarget;
+      const task = e.currentTarget.closest("div");
+      // console.log(task);
 
       //dosen't work as i want, but almost!!
-      task.closest(".wrapper").remove();
+      task.remove();
     });
   });
 
@@ -40,26 +41,32 @@ function handleEventlisteners() {
 
   //Display the edit form on click
   editBtns.forEach(editBtn => {
+    console.log("you clicked edit");
+
     editBtn.addEventListener("click", function(e) {
       e.preventDefault();
-      console.log("you clicked edit");
-      const test = e.currentTarget.closest("div");
 
+      //Need to find the closes task-form and toggle class active
+      const test = e.currentTarget.parentElement;
+
+      //Need to target the closest p not the closest div
+      //and then update text.
       console.log(test);
-
       taskForm.classList.toggle("active");
     });
   });
 
   //move finished task to bottom and make it green
-  const doneBtn = document.querySelector(".done");
+  const doneBtns = document.querySelectorAll(".done");
 
-  doneBtn.addEventListener("click", function(e) {
-    e.preventDefault();
-    const taskWrapper = e.currentTarget.closest("article");
-    console.log("you clicked done");
+  doneBtns.forEach(doneBtn => {
+    doneBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const taskWrapper = e.currentTarget.closest("div");
+      console.log("you clicked done");
 
-    taskWrapper.classList.add("finished");
+      taskWrapper.classList.add("finished");
+    });
   });
 }
 
