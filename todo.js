@@ -19,14 +19,18 @@ function handleEventlisteners() {
 
       currentForm.classList.remove("active");
 
-      console.log(currentForm.input);
+      // value from updated text
+      const updatedText = currentForm.firstElementChild.value;
 
-      //Need to target closest paragraph and update text
+      console.log(updatedText);
 
-      //value from updated text
-      // const hej = updatedTask.value;
+      //Need to target closest paragraph and insert updates text
 
-      // taskaa.closest(".task-text").innerHTML = "he";
+      const parent = currentForm.parentElement;
+
+      parent.firstElementChild.innerHTML = updatedText;
+
+      currentForm.reset();
     });
   });
 
@@ -81,11 +85,10 @@ form.addEventListener("submit", function(e) {
 
   div.classList.add("wrapper");
 
-  const template = `  <p id="hej" class="task-text"> ${taskValue}</p> 
+  const template = ` <p class="task-text"> ${taskValue}</p> 
   <button class="done"> Done </button>  
   <button class="edit"> Edit </button>
     <form class="task-form">
-    <label for="update-task">Update task</label>
     <input name="update-task" class="update-task-text" placeholder="Update task"></input>
     <button class="update">Save</button>
     <button class="delete">Delete</button>
